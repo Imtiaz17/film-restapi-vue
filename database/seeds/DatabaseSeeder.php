@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Film;
+use App\User;
+use App\Comment;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        //factory(User::class,3)->create();
+        factory(Film::class,6)->create()->each(function($film){
+            return $film->comments()->save(factory(Comment::class)->make());
+        });
+
     }
 }
