@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="columns is-mobile is-centered mt-20">
-            <div class="column is-6-desktop is-12-mobile" >
+            <div class="column is-6-desktop is-10-mobile" >
                 <div class="box" v-for="(film,i) in films" :key="i" >
                     <router-link :to="{name:'filmpost',params:{slug:film.slug}}">
                     <article class="media">
@@ -34,6 +34,11 @@
 
                 <button v-if="films.length>0" :class="isload?'is-loading':''" class="button is-info" @click="loadmore">Load More</button>
             </div>
+            <div class="column is-2-desktop is-2-mobile" v-if="loggedin">
+                <router-link :to="{name:'createfilm'}">
+                 <button class="button is-primary">Add Film</button>
+             </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -47,7 +52,10 @@ export default {
         }
     },
     computed: {
-
+        loggedin()
+        {
+            return this.$store.getters.loggedIn
+        },
     },
     created() {
         axios.get('/api/films?page=' + this.page)

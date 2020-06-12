@@ -60,6 +60,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -68,7 +73,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       page: 1
     };
   },
-  computed: {},
+  computed: {
+    loggedin: function loggedin() {
+      return this.$store.getters.loggedIn;
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -169,7 +178,7 @@ var render = function() {
     _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
       _c(
         "div",
-        { staticClass: "column is-6-desktop is-12-mobile" },
+        { staticClass: "column is-6-desktop is-10-mobile" },
         [
           _vm._l(_vm.films, function(film, i) {
             return _c(
@@ -254,7 +263,22 @@ var render = function() {
             : _vm._e()
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _vm.loggedin
+        ? _c(
+            "div",
+            { staticClass: "column is-2-desktop is-2-mobile" },
+            [
+              _c("router-link", { attrs: { to: { name: "createfilm" } } }, [
+                _c("button", { staticClass: "button is-primary" }, [
+                  _vm._v("Add Film")
+                ])
+              ])
+            ],
+            1
+          )
+        : _vm._e()
     ])
   ])
 }

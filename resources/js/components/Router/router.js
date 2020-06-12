@@ -6,6 +6,7 @@ const login  = () => import ("../App/AppLogin.vue")
 const signup  = () => import ("../App/AppSignup.vue")
 const films  = () => import ("../App/AppFilms.vue")
 const filmpost  = () => import ("../App/FilmPost.vue")
+const createfilm  = () => import ("../App/CreateFilm.vue")
 
 const routes = [
   	{ path: '/', redirect: '/films'},
@@ -13,6 +14,7 @@ const routes = [
     { path: '/login', component: login, name:'login' },
     { path: '/signup', component: signup, name:'signup' },
     { path: '/films/:slug', component: filmpost, name:'filmpost' },
+    { path: '/film/create', component: createfilm, name:'createfilm' },
   ]
 
 

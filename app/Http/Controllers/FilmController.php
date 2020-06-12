@@ -36,7 +36,25 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $film= new Film();
+        $film->name=$request->name;
+        $film->slug=str_slug($request->name);
+        $film->description=$request->description;
+        $film->release=$request->release;
+        $film->date=date("Y-m-d", strtotime($request->date));
+        $film->rating=$request->rating;
+        $film->ticket=$request->ticket;
+        $film->price=$request->price;
+        $film->country=$request->country;
+        $film->genre=$request->genre;
+        $photo=$request->photo;
+        $imgname = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
+          \Image::make($photo)->resize(650, 275, function ($c) {
+                    $c->aspectRatio();
+                    $c->upsize();
+                })->save(public_path('storage/images/') . $imgname);
+        $film->photo=$imgname;
+        $film->save();
     }
 
     /**

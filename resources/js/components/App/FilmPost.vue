@@ -37,8 +37,8 @@
             <div class="column is-6-desktop is-12-mobile">
                 <div class="card">
                     <div class="card-content">
-                        <textarea class="textarea" placeholder="Comment"></textarea>
-                        <button class="button is-info mt-10 is-right">Submit</button>
+                        <textarea class="textarea" v-model="comment" placeholder="Comment"></textarea>
+                        <button class="button is-info mt-10 is-right" @click="commentpost">Submit</button>
                     </div>
                 </div>
             </div>
@@ -79,26 +79,51 @@ export default {
         return {
             slug: this.$route.params.slug,
             data: '',
+            comment:'',
         }
     },
     computed: {
         loggedin()
         {
             return this.$store.getters.loggedIn
+        },
+        user()
+        {
+            return this.$store.getters.user
         }
     },
     created() {
-        axios.get(`/api/films/${this.slug}`)
-            .then(res => {
-                this.data = res.data.data
-            })
+       this.getFilm()
     },
     mounted() {
 
     },
     methods: {
+        getFilm()
+        {
+              axios.get(`/api/films/${this.slug}`)
+            .then(res => {
+                this.data = res.data.data
+            })
+        },
         getPhoto(pic) {
             return pic;
+        },
+        commentpost()
+        {
+            axios.post('/api/comment',{
+                user_id:this.user.id,
+                film_id:this.data.id,
+                name:this.user.name,
+                comment:this.comment
+
+            })
+            .then(res=>{
+                this.comment=''
+                setTimeout(() => {
+                    this.getFilm()
+                },0)
+            })
         }
 
     },

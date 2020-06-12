@@ -35,7 +35,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->validate([
+        'name'=>'required',
+        'comment'=>'required'
+        ]);
+
+        $comment= new Comment();
+        $comment->name=$request->name;
+        $comment->comment=$request->comment;
+        $comment->user_id=auth()->user()->id;
+        $comment->film_id=$request->film_id;
+        $comment->save();
+        return response()->json(['message' => 'comment successfull'],201);
     }
 
     /**

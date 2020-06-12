@@ -57221,6 +57221,10 @@ var filmpost = function filmpost() {
   return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../App/FilmPost.vue */ "./resources/js/components/App/FilmPost.vue"));
 };
 
+var createfilm = function createfilm() {
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../App/CreateFilm.vue */ "./resources/js/components/App/CreateFilm.vue"));
+};
+
 var routes = [{
   path: '/',
   redirect: '/films'
@@ -57240,6 +57244,10 @@ var routes = [{
   path: '/films/:slug',
   component: filmpost,
   name: 'filmpost'
+}, {
+  path: '/film/create',
+  component: createfilm,
+  name: 'createfilm'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,

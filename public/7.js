@@ -88,25 +88,47 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       slug: this.$route.params.slug,
-      data: ''
+      data: '',
+      comment: ''
     };
   },
   computed: {
     loggedin: function loggedin() {
       return this.$store.getters.loggedIn;
+    },
+    user: function user() {
+      return this.$store.getters.user;
     }
   },
   created: function created() {
-    var _this = this;
-
-    axios.get("/api/films/".concat(this.slug)).then(function (res) {
-      _this.data = res.data.data;
-    });
+    this.getFilm();
   },
   mounted: function mounted() {},
   methods: {
+    getFilm: function getFilm() {
+      var _this = this;
+
+      axios.get("/api/films/".concat(this.slug)).then(function (res) {
+        _this.data = res.data.data;
+      });
+    },
     getPhoto: function getPhoto(pic) {
       return pic;
+    },
+    commentpost: function commentpost() {
+      var _this2 = this;
+
+      axios.post('/api/comment', {
+        user_id: this.user.id,
+        film_id: this.data.id,
+        name: this.user.name,
+        comment: this.comment
+      }).then(function (res) {
+        _this2.comment = '';
+        setTimeout(function () {
+          _this2.getFilm();
+        }, 0);
+      });
     }
   },
   watch: {}
@@ -249,7 +271,42 @@ var render = function() {
     _vm._v(" "),
     _vm.loggedin
       ? _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
-          _vm._m(1)
+          _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-content" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.comment,
+                      expression: "comment"
+                    }
+                  ],
+                  staticClass: "textarea",
+                  attrs: { placeholder: "Comment" },
+                  domProps: { value: _vm.comment },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.comment = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-info mt-10 is-right",
+                    on: { click: _vm.commentpost }
+                  },
+                  [_vm._v("Submit")]
+                )
+              ])
+            ])
+          ])
         ])
       : _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
           _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
@@ -307,25 +364,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "icon is-small" }, [
       _c("i", { staticClass: "fas fa-heart", attrs: { "aria-hidden": "true" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-content" }, [
-          _c("textarea", {
-            staticClass: "textarea",
-            attrs: { placeholder: "Comment" }
-          }),
-          _vm._v(" "),
-          _c("button", { staticClass: "button is-info mt-10 is-right" }, [
-            _vm._v("Submit")
-          ])
-        ])
-      ])
     ])
   }
 ]
