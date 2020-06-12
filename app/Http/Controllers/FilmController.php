@@ -47,7 +47,7 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        return new FilmResource($film);
     }
 
     /**

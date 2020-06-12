@@ -59,8 +59,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     login: function login() {
-      axios.post('/api/login', this.form).then(function (response) {
-        localStorage.setItem('token', response.data);
+      var _this = this;
+
+      axios.post('/api/login', this.form).then(function (res) {
+        _this.$store.dispatch("saveToken", {
+          token: res.data
+        });
       });
     }
   },

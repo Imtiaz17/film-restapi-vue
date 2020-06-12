@@ -19,16 +19,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      slug: this.$route.params.slug
+      slug: this.$route.params.slug,
+      data: ''
     };
   },
   computed: {},
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/films/".concat(this.slug)).then(function (res) {
+      _this.data = res.data.data;
+    });
+  },
   mounted: function mounted() {},
-  methods: {},
+  methods: {
+    getPhoto: function getPhoto(pic) {
+      return pic;
+    }
+  },
   watch: {}
 });
 
@@ -50,9 +89,51 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column is-6" }, [
-        _vm._v("\n\t\t\t" + _vm._s(_vm.slug) + "\n\t\t")
+    _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
+      _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-image" }, [
+            _c("figure", { staticClass: "image is-3by2" }, [
+              _c("img", {
+                attrs: {
+                  src: _vm.getPhoto(_vm.data.image),
+                  alt: "Placeholder image"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-content" }, [
+            _c("div", { staticClass: "media" }, [
+              _c("div", { staticClass: "media-content" }, [
+                _c("p", { staticClass: "title is-4" }, [
+                  _vm._v(_vm._s(_vm.data.name) + " (  "),
+                  _c("small", [_vm._v(_vm._s(_vm.data.country))]),
+                  _vm._v(")")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "content" }, [
+              _vm._v(
+                "\n                      " +
+                  _vm._s(_vm.data.description) +
+                  "\n                      "
+              ),
+              _c("br"),
+              _vm._v(
+                " \n                      Genre: " +
+                  _vm._s(_vm.data.genre) +
+                  "\n                        "
+              ),
+              _c("br"),
+              _vm._v(" "),
+              _c("p", [_vm._v("Date: " + _vm._s(_vm.data.date))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Ticket: " + _vm._s(_vm.data.ticket))])
+            ])
+          ])
+        ])
       ])
     ])
   ])

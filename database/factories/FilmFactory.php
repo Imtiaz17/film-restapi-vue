@@ -6,11 +6,10 @@ use App\Film;
 use Faker\Generator as Faker;
 
 $factory->define(Film::class, function (Faker $faker) {
-	for ($i = 0; $i < 3; $i++) {
-  		$genre= $faker->name;
-	};
+    $title=$faker->name;
     return [
-       	'name'=>$faker->name,
+       	'name'=>$title,
+        'slug'=>str_slug($title),
         'description'=>$faker->text($maxNbChars =50),
         'release'=>$faker->year($max = 'now'),
         'date'=>$faker->date($format = 'Y-m-d', $max = 'now'),
@@ -18,7 +17,7 @@ $factory->define(Film::class, function (Faker $faker) {
         'price'=>$faker->randomNumber(3),
         'country'=>$faker->country,
         'rating'=>$faker->numberBetween(1, 5),
-        'genre'=>$genre,
-        'photo'=>$faker->image('public/storage/images',640,480, null, false),
+        'genre'=>$faker->name,
+        'photo'=>$faker->image('public/storage/images',400,300, null, false),
     ];
 });

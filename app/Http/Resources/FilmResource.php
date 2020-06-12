@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\CommentResource;
 
 class FilmResource extends JsonResource
 {
@@ -14,9 +15,10 @@ class FilmResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'name'=>$this->name,
-            'slug'=>str_slug($this->name,'-'),
+            'slug'=>$this->slug,
             'description'=>$this->description,
             'release'=>$this->release,
             'date'=>$this->date,
@@ -26,6 +28,7 @@ class FilmResource extends JsonResource
             'genre'=>$this->genre,
             'image'=>asset('storage/images/' . $this->photo),
             'id'=>$this->id,
+            'comments'=>CommentResource::collection($this->comments),
         ];
     }
 }

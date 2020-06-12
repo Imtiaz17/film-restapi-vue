@@ -14,30 +14,19 @@
                             <div class="content">
                                 <p>
                                     <strong>{{film.name}}</strong>
-                                    <span class="rating">{{film.rating}}.00</span>
+                                    <span class="rating">
+                                       <a class="level-item" aria-label="like">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-heart" aria-hidden="true"></i>
+                                        </span>
+                                         {{film.rating}}.00
+                                    </a>
+                               </span>
                                     <br>
                                     {{film.description}}
                                 </p>
                             </div>
-                            <nav class="level is-mobile">
-                                <div class="level-left">
-                                    <a class="level-item" aria-label="reply">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-reply" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="retweet">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-retweet" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="like">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-heart" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                </div>
-                            </nav>
+                        
                         </div>
                     </article>
                 </router-link>
@@ -93,4 +82,7 @@ export default {
 
 </script>
 <style scoped>
+.icon.is-small {
+    margin-right: 2px;
+}
 </style>

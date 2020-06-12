@@ -58,8 +58,10 @@ export default {
     	login()
     	{
 			axios.post('/api/login',this.form)
-			   .then(response => {
-			   	localStorage.setItem('token',response.data)
+			   .then(res => {
+			   	this.$store.dispatch("saveToken", {
+                    token: res.data
+                  });
 			   })
     	}
     },
