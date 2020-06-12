@@ -22,11 +22,11 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-const token = `Bearer ${localStorage.getItem('token')}`
-if (token) {
-window.axios.defaults.headers.common['Authorization'] = token;
-}
+// const token= localStorage.getItem('token')
+// if (token) {
+// const authtoken = `Bearer ${localStorage.getItem('token')}`
+// window.axios.defaults.headers.common['Authorization'] = authtoken;
+// }
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

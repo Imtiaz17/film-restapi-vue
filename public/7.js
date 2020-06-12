@@ -72,6 +72,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -79,7 +91,11 @@ __webpack_require__.r(__webpack_exports__);
       data: ''
     };
   },
-  computed: {},
+  computed: {
+    loggedin: function loggedin() {
+      return this.$store.getters.loggedIn;
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -231,7 +247,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _vm.loggedin
+      ? _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
+          _vm._m(1)
+        ])
+      : _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
+          _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-content" },
+                [
+                  _c("p", [_vm._v("Login to comment")]),
+                  _vm._v(" "),
+                  _c("router-link", { attrs: { to: "/login" } }, [
+                    _c(
+                      "button",
+                      { staticClass: "button is-info mt-10 is-right" },
+                      [_vm._v("Login")]
+                    )
+                  ])
+                ],
+                1
+              )
+            ])
+          ])
+        ]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
       _c(
@@ -272,18 +313,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns is-mobile is-centered mt-20" }, [
-      _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-content" }, [
-            _c("textarea", {
-              staticClass: "textarea",
-              attrs: { placeholder: "Comment" }
-            }),
-            _vm._v(" "),
-            _c("button", { staticClass: "button is-info mt-10 is-right" }, [
-              _vm._v("Submit")
-            ])
+    return _c("div", { staticClass: "column is-6-desktop is-12-mobile" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-content" }, [
+          _c("textarea", {
+            staticClass: "textarea",
+            attrs: { placeholder: "Comment" }
+          }),
+          _vm._v(" "),
+          _c("button", { staticClass: "button is-info mt-10 is-right" }, [
+            _vm._v("Submit")
           ])
         ])
       ])

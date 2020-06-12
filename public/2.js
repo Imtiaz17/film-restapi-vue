@@ -39,14 +39,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
   },
-  computed: {},
+  computed: {
+    loggedin: function loggedin() {
+      return this.$store.getters.loggedIn;
+    },
+    username: function username() {
+      return this.$store.getters.user.name;
+    }
+  },
   created: function created() {},
   mounted: function mounted() {},
-  methods: {},
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/api/logout').then(function (res) {
+        _this.$store.dispatch('removeuser');
+      });
+    }
+  },
   watch: {}
 });
 
@@ -95,39 +122,69 @@ var render = function() {
         [
           _c("div", { staticClass: "navbar-start" }),
           _vm._v(" "),
-          _c("div", { staticClass: "navbar-end" }, [
-            _c("div", { staticClass: "navbar-item" }, [
-              _c(
-                "div",
-                { staticClass: "buttons" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "button is-primary",
-                      attrs: { to: "/signup" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Sign Up\n                    "
+          _vm.loggedin
+            ? _c("div", { staticClass: "navbar-end" }, [
+                _c(
+                  "div",
+                  { staticClass: "navbar-item has-dropdown is-hoverable" },
+                  [
+                    _c("a", { staticClass: "navbar-link" }, [
+                      _c("p", [_vm._v(_vm._s(_vm.username))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "navbar-dropdown" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "navbar-item",
+                          on: { click: _vm.logout }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Logout\n                    "
+                          )
+                        ]
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
+                    ])
+                  ]
+                )
+              ])
+            : _c("div", { staticClass: "navbar-end" }, [
+                _c("div", { staticClass: "navbar-item" }, [
                   _c(
-                    "router-link",
-                    { staticClass: "button is-info", attrs: { to: "/login" } },
+                    "div",
+                    { staticClass: "buttons" },
                     [
-                      _vm._v(
-                        "\n                        Log in\n                    "
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "button is-primary",
+                          attrs: { to: "/signup" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Sign Up\n                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "button is-info",
+                          attrs: { to: "/login" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Log in\n                    "
+                          )
+                        ]
                       )
-                    ]
+                    ],
+                    1
                   )
-                ],
-                1
-              )
-            ])
-          ])
+                ])
+              ])
         ]
       )
     ]

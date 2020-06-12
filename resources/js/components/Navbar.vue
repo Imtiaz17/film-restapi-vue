@@ -13,10 +13,22 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
             </div>
-            <div class="navbar-end">
+            <div class="navbar-end" v-if="loggedin">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        <p>{{username}}</p>
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" @click="logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-end" v-else>
                 <div class="navbar-item">
                     <div class="buttons">
-                         <router-link to="/signup" class="button is-primary">
+                        <router-link to="/signup" class="button is-primary">
                             Sign Up
                         </router-link>
                         <router-link to="/login" class="button is-info">
@@ -36,7 +48,12 @@ export default {
         }
     },
     computed: {
-
+        loggedin() {
+            return this.$store.getters.loggedIn
+        },
+        username() {
+            return this.$store.getters.user.name
+        }
     },
     created() {
 
@@ -45,7 +62,13 @@ export default {
 
     },
     methods: {
-
+        logout(){
+            axios.post('/api/logout')
+            .then(res=>{
+                 this.$store.dispatch('removeuser')
+            })
+           
+        }
     },
     watch: {
 

@@ -59,9 +59,9 @@ export default {
     	{
 			axios.post('/api/login',this.form)
 			   .then(res => {
-			   	this.$store.dispatch("saveToken", {
-                    token: res.data
-                  });
+			   	this.$store.dispatch("saveToken",{
+                    token:res.data
+                })
 			   })
     	}
     },

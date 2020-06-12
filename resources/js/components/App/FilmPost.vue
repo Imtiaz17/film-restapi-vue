@@ -33,12 +33,24 @@
                 </div>
             </div>
         </div>
-        <div class="columns is-mobile is-centered mt-20">
+        <div class="columns is-mobile is-centered mt-20" v-if="loggedin">
             <div class="column is-6-desktop is-12-mobile">
                 <div class="card">
                     <div class="card-content">
                         <textarea class="textarea" placeholder="Comment"></textarea>
                         <button class="button is-info mt-10 is-right">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="columns is-mobile is-centered mt-20" v-else>
+            <div class="column is-6-desktop is-12-mobile">
+                <div class="card">
+                    <div class="card-content">
+                        <p>Login to comment</p>
+                        <router-link to="/login">
+                        <button class="button is-info mt-10 is-right">Login</button>
+                    </router-link>
                     </div>
                 </div>
             </div>
@@ -70,7 +82,10 @@ export default {
         }
     },
     computed: {
-
+        loggedin()
+        {
+            return this.$store.getters.loggedIn
+        }
     },
     created() {
         axios.get(`/api/films/${this.slug}`)
