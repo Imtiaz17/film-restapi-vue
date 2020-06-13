@@ -46,7 +46,8 @@ class FilmController extends Controller
         $film->ticket=$request->ticket;
         $film->price=$request->price;
         $film->country=$request->country;
-        $film->genre=$request->genre;
+        $genre = $request->genre;
+        $film->genre=implode(",", $genre);
         $photo=$request->photo;
         $imgname = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
           \Image::make($photo)->resize(650, 275, function ($c) {
@@ -55,6 +56,7 @@ class FilmController extends Controller
                 })->save(public_path('storage/images/') . $imgname);
         $film->photo=$imgname;
         $film->save();
+        return new FilmResource($film);
     }
 
     /**

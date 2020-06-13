@@ -48,6 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isload: false,
       form: {
         email: '',
         password: ''
@@ -61,10 +62,13 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
+      this.isload = true;
       axios.post('/api/login', this.form).then(function (res) {
         _this.$store.dispatch("saveToken", {
           token: res.data
         });
+
+        _this.isload = false;
       });
     }
   },
@@ -154,7 +158,11 @@ var render = function() {
             _c("p", { staticClass: "control" }, [
               _c(
                 "button",
-                { staticClass: "button is-success", on: { click: _vm.login } },
+                {
+                  staticClass: "button is-success",
+                  class: _vm.isload ? "is-loading" : "",
+                  on: { click: _vm.login }
+                },
                 [
                   _vm._v(
                     "\n                            Login\n                        "

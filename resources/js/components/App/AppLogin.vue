@@ -24,7 +24,7 @@
                     </div>
                     <div class="field">
                         <p class="control">
-                            <button class="button is-success" @click="login">
+                            <button :class="isload?'is-loading':''" class="button is-success" @click="login">
                                 Login
                             </button>
                         </p>
@@ -38,10 +38,11 @@
 export default {
     data() {
         return {
-        	form:{
-        		email:'',
-        		password:''
-        	}
+            isload: false,
+            form: {
+                email: '',
+                password: ''
+            }
 
         }
     },
@@ -55,15 +56,16 @@ export default {
 
     },
     methods: {
-    	login()
-    	{
-			axios.post('/api/login',this.form)
-			   .then(res => {
-			   	this.$store.dispatch("saveToken",{
-                    token:res.data
+        login() {
+            this.isload = true
+            axios.post('/api/login', this.form)
+                .then(res => {
+                    this.$store.dispatch("saveToken", {
+                        token: res.data
+                    })
+                    this.isload = false
                 })
-			   })
-    	}
+        }
     },
     watch: {
 

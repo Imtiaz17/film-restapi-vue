@@ -8,7 +8,7 @@
                             <input class="input" type="text" placeholder="Name" v-model="form.name">
                         </p>
                         <p class="control">
-                           <textarea class="textarea" rows="3" v-model="form.description" placeholder="description"></textarea>
+                            <textarea class="textarea" rows="3" v-model="form.description" placeholder="description"></textarea>
                         </p>
                         <p class="control">
                             <input class="input" type="text" placeholder="Release" v-model="form.release">
@@ -16,11 +16,10 @@
                         <p class="control">
                             <input class="input" type="date" placeholder="Date" v-model="form.date">
                         </p>
-
                         <p class="control">
                             <div class="select">
                                 <select v-model="form.rating">
-                                	<option value="null" selected hidden>Select a rating</option>
+                                    <option value="null" selected hidden>Select a rating</option>
                                     <option v-for="(rating,i) in ratings" :key="i" :value="rating">{{rating}}</option>
                                 </select>
                             </div>
@@ -35,7 +34,7 @@
                             <input class="input" type="text" placeholder="Country" v-model="form.country">
                         </p>
                         <p class="control">
-                            <input class="input" type="text" placeholder="Genre" v-model="form.genre">
+                            <multiselect :multiple="true" placeholder="Select genre" v-model="form.genre" :options="options"></multiselect>
                         </p>
                         <p class="control">
                             <div class="file">
@@ -50,14 +49,13 @@
                                         </span>
                                     </span>
                                 </label>
-
                             </div>
                             <p>{{filename}}</p>
                         </p>
                     </div>
                     <div class="field">
                         <p class="control">
-                            <button class="button is-success" @click="submit">
+                            <button :class="isload?'is-loading':''" class="button is-success" @click="submit">
                                 Submit
                             </button>
                         </p>
@@ -68,10 +66,13 @@
     </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
+    components: { Multiselect },
     data() {
         return {
-        	filename:'',
+            isload: false,
+            filename: '',
             form: {
                 name: "",
                 description: "",
@@ -81,16 +82,17 @@ export default {
                 ticket: "",
                 price: "",
                 country: "",
-                genre: "",
+                genre: [],
                 photo: "",
             },
-            ratings:[
-            	'1',
-            	'2',
-            	'3',
-            	'4',
-            	'5'
-            ]
+            ratings: [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5'
+            ],
+            options: ['Horror', 'Action', 'Comedy', 'Science Fiction', 'Romantic', 'Thriller', 'Animation', 'Fantasy']
         }
     },
     computed: {
@@ -103,8 +105,8 @@ export default {
 
     },
     methods: {
-    	onPhotoChnage(e) {
-             let file = e.target.files[0];
+        onPhotoChnage(e) {
+            let file = e.target.files[0];
             this.filename = file.name
             let reader = new FileReader();
             reader.onload = (file) => {
@@ -112,13 +114,18 @@ export default {
             }
             reader.readAsDataURL(file);
         },
-        submit()
-        {
-        	axios.post('/api/films',this.form)
-            .then(res=>{
-                this.form=null
-                this.$router.push({name:'films'})
-            })
+        submit() {
+            this.isload = true,
+                axios.post('/api/films', this.form)
+                .then(res => {
+                    this.isload = false
+                    this.form = null
+                    this.$router.push({ name: 'films' })
+                })
+                .catch(error=>{
+                    this.isload=false
+                    console.log(error)
+                })
         }
 
     },
@@ -128,14 +135,15 @@ export default {
 };
 
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-.select
-{
-	width: 100%;
+.select {
+    width: 100%;
 }
-select
-{
-	width: 100%;
+
+select {
+    width: 100%;
 
 }
+
 </style>

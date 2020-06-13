@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
+    public function signup(Request $request)
+    {
+        $validateData=$request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'min:6', 'confirmed'
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+        return response()->json(['user' =>$user ], 201);
+    }
     /**
      * Get a JWT via given credentials.
      *

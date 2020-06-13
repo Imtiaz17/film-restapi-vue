@@ -265,20 +265,18 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _vm.loggedin
-        ? _c(
-            "div",
-            { staticClass: "column is-2-desktop is-2-mobile" },
-            [
-              _c("router-link", { attrs: { to: { name: "createfilm" } } }, [
-                _c("button", { staticClass: "button is-primary" }, [
-                  _vm._v("Add Film")
-                ])
-              ])
-            ],
-            1
-          )
-        : _vm._e()
+      _c(
+        "div",
+        { staticClass: "column is-2-desktop is-2-mobile" },
+        [
+          _c("router-link", { attrs: { to: { name: "createfilm" } } }, [
+            _c("button", { staticClass: "button is-primary" }, [
+              _vm._v("Add Film")
+            ])
+          ])
+        ],
+        1
+      )
     ])
   ])
 }

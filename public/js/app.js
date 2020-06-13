@@ -57222,7 +57222,7 @@ var filmpost = function filmpost() {
 };
 
 var createfilm = function createfilm() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../App/CreateFilm.vue */ "./resources/js/components/App/CreateFilm.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../App/CreateFilm.vue */ "./resources/js/components/App/CreateFilm.vue"));
 };
 
 var routes = [{

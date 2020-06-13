@@ -34,7 +34,7 @@
 
                 <button v-if="films.length>0" :class="isload?'is-loading':''" class="button is-info" @click="loadmore">Load More</button>
             </div>
-            <div class="column is-2-desktop is-2-mobile" v-if="loggedin">
+            <div class="column is-2-desktop is-2-mobile">
                 <router-link :to="{name:'createfilm'}">
                  <button class="button is-primary">Add Film</button>
              </router-link>
