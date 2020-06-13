@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
         genre: "",
         photo: ""
       },
-      ratings: ['1', '2', '3', '4', '5', '6']
+      ratings: ['1', '2', '3', '4', '5']
     };
   },
   computed: {},

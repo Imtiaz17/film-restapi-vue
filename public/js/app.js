@@ -2047,10 +2047,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     navBar: function navBar() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./Navbar */ "./resources/js/components/Navbar.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./Navbar */ "./resources/js/components/Navbar.vue"));
     },
     AppFooter: function AppFooter() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./AppFooter */ "./resources/js/components/AppFooter.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./AppFooter */ "./resources/js/components/AppFooter.vue"));
     }
   }
 });
@@ -57214,15 +57214,15 @@ var signup = function signup() {
 };
 
 var films = function films() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../App/AppFilms.vue */ "./resources/js/components/App/AppFilms.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../App/AppFilms.vue */ "./resources/js/components/App/AppFilms.vue"));
 };
 
 var filmpost = function filmpost() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../App/FilmPost.vue */ "./resources/js/components/App/FilmPost.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../App/FilmPost.vue */ "./resources/js/components/App/FilmPost.vue"));
 };
 
 var createfilm = function createfilm() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../App/CreateFilm.vue */ "./resources/js/components/App/CreateFilm.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../App/CreateFilm.vue */ "./resources/js/components/App/CreateFilm.vue"));
 };
 
 var routes = [{
